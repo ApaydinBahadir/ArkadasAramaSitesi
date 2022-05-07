@@ -16,16 +16,26 @@
  
             <div id="chatbox"></div>
  
-            <form name="message" action="">
+            <form action="">
                 <input id="usermsg" type="text" name="usermsg"/>
-                <input id="submitmsg" type="submit" name="submitmsg" value="Send" />
+                <input id="submitmsg" type="submit" name="submitmsg" onclick="sendMessage()" value="Send" />
             </form>
         </div>
-         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <script type="text/javascript">
-             // jQuery Document
-             $(document).ready(function () {});
-         </script>
-
+        
+        <script>
+        		var WsUrl = "ws://localhost:8080/ArkadasAramaSitesi/chat";
+        		websocket = new WebSocket(WsUrl);
+        		
+        		websocket.onmessage = function processMessage(usermsg){
+        			//chatbox.value += usermsg.data + "n";
+        			document.getElementById("chatbox").innerHTML = usermsg.data;
+        		};
+        		
+        		function sendMessage(){
+        			websocket.send(usermsg.value);
+        			usermsg.value = "";
+        		}
+        		
+        </script>
 </body>
 </html>
