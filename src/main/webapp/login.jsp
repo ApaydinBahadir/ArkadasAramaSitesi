@@ -8,6 +8,8 @@
 </head>
 <body>
 
+
+
 <div class="container">
 
 	<div class="form-container sign-up-container">
@@ -24,7 +26,7 @@
 	<div class="form-container log-in-container">
 	<form action="login" method="post">
 			<h1>Log In</h1>
-			<input type="email" placeholder="Email" name="email" />
+			<input type="text" placeholder="UserName" name="username" />
 			<input type="password" placeholder="Password" name="password_" />
 			<a href="#">Forgot your password?</a>
 			<button>Sign In</button>
