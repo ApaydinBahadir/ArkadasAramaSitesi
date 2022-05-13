@@ -1,20 +1,22 @@
 package web.AAS;
 
+
 public class Member {
-	public int userID;
-	public String username;
-	public String email;
-	public String registerDate;
-	public String password_;
-	public String birthDate;
-	public String gender;
-	public String privelege;
-	public void setusername(String string) {
-		// TODO Auto-generated method stub
-		
+	private int userID;
+	private String username;
+	private String email;
+	private String registerDate;
+	private String password_;
+	private String birthDate;
+	private String gender;
+	private String privelege;
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setemail(String email2) {
-		// TODO Auto-generated method stub
-		
+	public void setusername(String username) {
+		this.username = username;
 	}
+	
+
 }
