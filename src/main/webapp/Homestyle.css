@@ -38,8 +38,17 @@
     text-decoration: underline;
   }
    
+   
+   #memberBox{
+    width:500px;
+   	height:600px;
+   	border: 4px solid #000000;
+   }
+   
+   
   #wrapper,
   #loginform {
+  	rigth: 0;
     margin: 0 auto;
     padding-bottom: 25px;
     background: #000000;
