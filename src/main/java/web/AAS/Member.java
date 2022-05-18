@@ -1,9 +1,15 @@
 package web.AAS;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Member {
+	
 	private int userID;
-	private String username;
+	private String userName;
 	private String email;
 	private String registerDate;
 	private String password_;
@@ -11,11 +17,18 @@ public class Member {
 	private String gender;
 	private String privelege;
 	
-	public String getUsername() {
-		return username;
+	public String getuserName() {
+		return userName;
 	}
-	public void setusername(String username) {
-		this.username = username;
+	public void setuserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public void setuserID(int userID) {
+		this.userID = userID;
+	}
+	public int getUserID() {
+		return userID;
 	}
 	public String getPrivelege() {
 		return privelege;
@@ -24,5 +37,4 @@ public class Member {
 		this.privelege = privelege;
 	}
 	
-
 }

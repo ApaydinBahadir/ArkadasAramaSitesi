@@ -2,6 +2,7 @@
 
 <%@ page import="java.sql.Connection, java.sql.PreparedStatement" %>
 <%@ page import="java.sql.SQLException,java.sql.DriverManager" %>
+<%@ page import="java.sql.ResultSet,java.sql.Statement"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,15 +12,13 @@
 <title>home</title>
 </head>
 <body>
-
-<<<<<<< Updated upstream
-=======
 			<table id="memberBox">
 				
 						<%
 						try
 						{
 						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -54,20 +53,10 @@
 					
 							
 			</table>
->>>>>>> Stashed changes
 
-<%!
-Connection baglanti=null;
-PreparedStatement ifade=null;
-String _userID,_message;
-%>
-
-
-<div id="wrapper">
+		<div id="wrapper">
             <div id="menu">
-<<<<<<< Updated upstream
-                <p class="welcome">${member.username}</p>
-=======
+
                 <p class="welcome">${member.userName}</p>
                 <%
 	            	if(session.getAttribute("privelege").equals("1") || session.getAttribute("privelege").equals("2")){
@@ -77,7 +66,8 @@ String _userID,_message;
 	            	}
 
                 %>
->>>>>>> Stashed changes
+
+                <p class="welcome">${member.userName}</p>
                 <p class="logout"><a id="exit" href="logout">Exit Chat</a></p>
             </div>
  
@@ -89,18 +79,24 @@ String _userID,_message;
             </div>
         </div>
         
+        
         <script>
         		var WsUrl = "ws://localhost:8080/ArkadasAramaSitesi/chat";
         		websocket = new WebSocket(WsUrl);
+
+        		
         		
         		websocket.onmessage = function processMessage(usermsg){
-        			document.getElementById("chatbox").innerHTML += "${member.username}:" + " " + usermsg.data + "<br/>";
+        			document.getElementById("chatbox").innerHTML +=  usermsg.data + "<br/>";
         		};
         		
         		function sendMessage(){
-        			websocket.send(usermsg.value);
+        			websocket.send("<mark>"+"${member.userName}"+"</mark>" + ":" + "<b>"+ usermsg.value +"</b>");
         			usermsg.value = "";
         		}
+        		
+        		
+        		
         		
         </script>
 </body>

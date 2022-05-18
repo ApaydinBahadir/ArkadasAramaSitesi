@@ -20,15 +20,15 @@ public class memberLoginServlet extends HttpServlet {
         super();
     }
 
-	
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String userName = request.getParameter("userName");
         String password_ = request.getParameter("password_");
         
         MemberController memberCtrl = new MemberController();
         
         try {
-            Member member = memberCtrl.checkLogin(username, password_);
+            Member member = memberCtrl.checkLogin(userName, password_);
             String destPage = "login.jsp";
              
             if (member != null) {
@@ -37,7 +37,7 @@ public class memberLoginServlet extends HttpServlet {
                 session.setAttribute("privelege", member.getPrivelege());
                 destPage = "home.jsp";
             } else {
-                String message = "Invalid username/password_";
+                String message = "Invalid userName/password_";
                 request.setAttribute("message", message);
             }
              
