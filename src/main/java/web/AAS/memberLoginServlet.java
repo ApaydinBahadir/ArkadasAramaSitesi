@@ -34,6 +34,7 @@ public class memberLoginServlet extends HttpServlet {
             if (member != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("member", member);
+                session.setAttribute("userName", member.getuserName());
                 session.setAttribute("privelege", member.getPrivelege());
                 destPage = "home.jsp";
             } else {

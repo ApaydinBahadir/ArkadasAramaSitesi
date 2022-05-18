@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 </head>
 <body>
 
@@ -41,7 +41,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
 	ifade=baglanti.prepareStatement("insert into member(userName,email,registerDate,password_,birthDate,gender,privelege) values(?,?,?,?,?,?,?) ");
 	ifade.setString(1, _userName);
 	ifade.setString(2, _email);

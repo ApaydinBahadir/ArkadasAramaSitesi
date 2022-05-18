@@ -20,7 +20,7 @@
 						try
 						{
 							
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -48,7 +48,6 @@
 			
 			<div id="messageBox">
 				<form action='message.jsp' method='post'>
-					<input type="text" placeholder="Sender" name="sender" />
 					<input type="text" placeholder="UserName" name="userName"/>
 					<input type="text" placeholder="Mesaj" name="message" />
 					<button>Send</button>
@@ -66,12 +65,16 @@
 						try
 						{
 						
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
-						String query="Select sender,message From message";
-						Statement stmt=conn.createStatement();
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+						
+						String sql = "SELECT sender,message FROM message WHERE userName = ?";
+
+						PreparedStatement statement = conn.prepareStatement(sql);
+				        statement.setString(1, (String)request.getSession().getAttribute("userName"));
+
 						
 						
-						ResultSet rs=stmt.executeQuery(query);
+						ResultSet rs=statement.executeQuery();
 					
 						while(rs.next())
 						{
