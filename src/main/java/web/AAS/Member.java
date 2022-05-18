@@ -17,6 +17,12 @@ public class Member {
 	public void setusername(String username) {
 		this.username = username;
 	}
+	public String getPrivelege() {
+		return privelege;
+	}
+	public void setPrivelege(String privelege) {
+		this.privelege = privelege;
+	}
 	
 
 }
