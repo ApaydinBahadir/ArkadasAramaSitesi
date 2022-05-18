@@ -14,16 +14,17 @@
   }
    
   form {
-    padding: 15px 25px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+    background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
   }
    
-  form label {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+
    
   input {
     font-family: "Lato";
@@ -40,11 +41,20 @@
    
    
    #memberBox{
-    width:500px;
-   	height:600px;
+    width: 400px;
+    height: 500px;
    	border: 4px solid #000000;
    }
    
+   #messageBox{
+   
+   }
+   
+   #messageView{
+    width: 200px;
+    height: 200px;
+    border: 4px solid #000000;
+   }
    
   #wrapper,
   #loginform {
