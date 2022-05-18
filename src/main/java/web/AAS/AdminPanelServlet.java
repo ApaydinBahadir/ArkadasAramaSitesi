@@ -10,24 +10,28 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/logout")
-public class memberLogoutServlet extends HttpServlet {
+@WebServlet("/admin")
+public class AdminPanelServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     
-    public memberLogoutServlet() {
+    public AdminPanelServlet() {
         super();
     }
 
-	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.removeAttribute("member");
-             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
-        }
+        HttpSession session = request.getSession();
+        String destPage="";
+    	if(session.getAttribute("privelege").equals("1")){
+    		destPage = "admin1.jsp";
+    	}else if(session.getAttribute("privelege").equals("2")){
+    		destPage = "admin2.jsp";
+    	}
+    	RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+    	dispatcher.forward(request, response);
 	}
 
+	
 }

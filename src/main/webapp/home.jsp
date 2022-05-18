@@ -12,14 +12,13 @@
 <title>home</title>
 </head>
 <body>
-
 			<table id="memberBox">
 				
 						<%
 						try
 						{
-							
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -55,12 +54,19 @@
 							
 			</table>
 
-
-
-
-
 		<div id="wrapper">
             <div id="menu">
+
+                <p class="welcome">${member.userName}</p>
+                <%
+	            	if(session.getAttribute("privelege").equals("1") || session.getAttribute("privelege").equals("2")){
+	            		%>
+	            			<a href="admin">deneme</a>
+	            		<%
+	            	}
+
+                %>
+
                 <p class="welcome">${member.userName}</p>
                 <p class="logout"><a id="exit" href="logout">Exit Chat</a></p>
             </div>

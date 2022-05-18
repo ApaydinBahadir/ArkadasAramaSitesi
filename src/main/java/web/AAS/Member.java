@@ -30,5 +30,11 @@ public class Member {
 	public int getUserID() {
 		return userID;
 	}
+	public String getPrivelege() {
+		return privelege;
+	}
+	public void setPrivelege(String privelege) {
+		this.privelege = privelege;
+	}
 	
 }
