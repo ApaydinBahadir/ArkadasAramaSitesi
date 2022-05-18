@@ -12,13 +12,15 @@
 <title>home</title>
 </head>
 <body>
-			<table id="memberBox">
+			
+		<div id="memberBox">
+			<table>
 				
 						<%
 						try
 						{
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
-
+							
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -33,14 +35,6 @@
 									"<td>"+
 										rs.getString("userName")+
 									"</td>"+
-								"</tr>"+
-								"<tr>"+
-									"<td>"+
-										"<input id='idvmsg' type='text' name='idvmsg' />"+
-									"</td>"+
-									"<td>"+
-										"<input id='sendmsg' type='submit' name='sendmsg' onclick='' value='Send' />"+
-									"</td>"+
 								"</tr>"
 									);
 						}
@@ -49,10 +43,62 @@
 						{
 						System.err.println(e);
 						}
-						%>
-					
-							
+						%>	
 			</table>
+			
+			<div id="messageBox">
+				<form action='message.jsp' method='post'>
+					<input type="text" placeholder="Sender" name="sender" />
+					<input type="text" placeholder="UserName" name="userName"/>
+					<input type="text" placeholder="Mesaj" name="message" />
+					<button>Send</button>
+				</form>
+			</div>
+			
+		</div>
+
+
+		
+		<div id="messageView">
+        	<table>
+        	
+        	<%
+						try
+						{
+						
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+						String query="Select sender,message From message";
+						Statement stmt=conn.createStatement();
+						
+						
+						ResultSet rs=stmt.executeQuery(query);
+					
+						while(rs.next())
+						{
+							
+						out.println(
+								"<tr>"+
+									"<td>"+
+										"<mark>"+rs.getString("sender")+"</mark>"+
+									"</td>"+
+									"<td>"+
+										"<b>"+rs.getString("message")+"</b>"+
+									"</td>"+
+								"</tr>"
+								
+							);
+
+						}
+						
+						}catch(Exception e)
+						{
+						System.err.println(e);
+						}
+						%>	
+        	</table>
+        </div>
+		
+
 
 		<div id="wrapper">
             <div id="menu">
@@ -64,10 +110,9 @@
 	            			<a href="admin">deneme</a>
 	            		<%
 	            	}
-
                 %>
 
-                <p class="welcome">${member.userName}</p>
+                
                 <p class="logout"><a id="exit" href="logout">Exit Chat</a></p>
             </div>
  
@@ -80,21 +125,26 @@
         </div>
         
         
+        
+        
+        
+        
         <script>
         		var WsUrl = "ws://localhost:8080/ArkadasAramaSitesi/chat";
         		websocket = new WebSocket(WsUrl);
 
         		
-        		
         		websocket.onmessage = function processMessage(usermsg){
         			document.getElementById("chatbox").innerHTML +=  usermsg.data + "<br/>";
         		};
+        		
         		
         		function sendMessage(){
         			websocket.send("<mark>"+"${member.userName}"+"</mark>" + ":" + "<b>"+ usermsg.value +"</b>");
         			usermsg.value = "";
         		}
         		
+        	
         		
         		
         		
