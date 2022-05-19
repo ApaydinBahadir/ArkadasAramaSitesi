@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@ page import="java.sql.Connection, java.sql.PreparedStatement" %>
 <%@ page import="java.sql.SQLException,java.sql.DriverManager" %>
@@ -8,7 +8,6 @@
 
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="jakarta.servlet.http.HttpServletRequest" %>
-
 
 <!DOCTYPE html>
 <html>
@@ -23,8 +22,6 @@ PreparedStatement ifade=null;
 String _userName,_sender,_message,_sendTime;
 int _groupId;
 
-
-
 LocalDateTime date = LocalDateTime.now();
 DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 String sendTime = date.format(formatDate);
@@ -32,7 +29,6 @@ String sendTime = date.format(formatDate);
 %>
 
 <%
-
 try{
 	_userName = request.getParameter("userName");
 	_sender= (String)request.getSession().getAttribute("userName");
@@ -47,7 +43,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
 	ifade=baglanti.prepareStatement("insert into message(userName,sender,groupId,message,sendTime) values(?,?,?,?,?) ");
 	ifade.setString(1, _userName);
 	ifade.setString(2, _sender);
@@ -55,7 +51,6 @@ try{
 	ifade.setString(4, _message);
 	ifade.setString(5, _sendTime);
 	ifade.executeUpdate();
-	out.println("Mesaj iletildi");
 }
 
 catch(SQLException e){
@@ -63,9 +58,6 @@ out.println(e);
 }
 
 %>
-<script type="text/javascript">
-	setTimeout(function(){ window.location = "home.jsp"; },2000);
-</script>
 
 </body>
 </html>

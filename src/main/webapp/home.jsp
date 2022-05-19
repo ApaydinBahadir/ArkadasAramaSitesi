@@ -14,13 +14,14 @@
 <body>
 			
 		<div id="memberBox">
+		<label><b>Site members</b></label>
 			<table>
 				
 						<%
 						try
 						{
 							
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -47,34 +48,66 @@
 			</table>
 			
 			<div id="messageBox">
+			<label><b>Send message</b></label>
 				<form action='message.jsp' method='post'>
 					<input type="text" placeholder="UserName" name="userName"/>
 					<input type="text" placeholder="Mesaj" name="message" />
-					<button>Send</button>
+					<button id="btnsendmsg">Send</button>
 				</form>
 			</div>
 			
+			
+
+
+			<div id="friendsBox">
+			<label><b>Add to friends</b></label>
+				<form action='friends.jsp' method='post'>
+				
+					<input type="hidden" name="userId" value= "${member.userID}" />
+					<input type="text" placeholder="AddFriend" name="userName"/>
+					
+					<input type="checkbox" name="relationType" value="friend">Friend
+					<input type="checkbox" name="relationType" value="dear">Dear
+					<input type="checkbox" name="relationType" value="flirt">Flirt
+					<button id="addfriends">Add</button>
+				</form>
+			</div>
+
 		</div>
+
+
+
+		<div id="friendsView">
+			<form action='friendsView.jsp' method='post'>
+				<input type="hidden" name="userId" value= "${member.userID}" />
+				<button>Friends List</button>
+			</form>
+     	</div>
+     	
+     	
+     	<div id="friendsDelete">
+			<form action='friendsDelete.jsp' method='post'>
+				<input type="text" placeholder="DeleteFriend" name="userName" />
+				<button id="deletefriends">Delete</button>
+			</form>
+     	</div>
+
 
 
 		
 		<div id="messageView">
+		<label><b>Email box</b></label>
         	<table>
         	
         	<%
 						try
 						{
 						
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
-						
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
 						String sql = "SELECT sender,message FROM message WHERE userName = ?";
-
 						PreparedStatement statement = conn.prepareStatement(sql);
 				        statement.setString(1, (String)request.getSession().getAttribute("userName"));
-
-						
-						
-						ResultSet rs=statement.executeQuery();
+				        ResultSet rs=statement.executeQuery();
 					
 						while(rs.next())
 						{
@@ -105,7 +138,7 @@
 
 		<div id="wrapper">
             <div id="menu">
-
+            
                 <p class="welcome">${member.userName}</p>
                 <%
 	            	if(session.getAttribute("privelege").equals("1") || session.getAttribute("privelege").equals("2")){
@@ -147,10 +180,30 @@
         			usermsg.value = "";
         		}
         		
+        		
         	
+    			document.getElementById("btnsendmsg")
+                		.onclick = function(){
+                         	window.setTimeout(function(){location.href = 'home.jsp';}, 50);                 
+                         };
+                         
+                 
+              	document.getElementById("addfriends")
+              			.onclick = function(){
+              				window.alert("Friend Added");
+           					window.setTimeout(function(){location.href = 'home.jsp';}, 50);                 
+            	};
+            	
+            	
+            	document.getElementById("deletefriends")
+        		.onclick = function(){
+            		window.alert("Friend Deleted");
+                 	window.setTimeout(function(){location.href = 'home.jsp';}, 50);                 
+                 };
+        	
+           </script>
         		
         		
-        		
-        </script>
+       
 </body>
 </html>
