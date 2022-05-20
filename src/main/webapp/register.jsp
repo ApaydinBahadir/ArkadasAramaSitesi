@@ -41,7 +41,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 	ifade=baglanti.prepareStatement("insert into member(userName,email,registerDate,password_,birthDate,gender,privelege) values(?,?,?,?,?,?,?) ");
 	ifade.setString(1, _userName);
 	ifade.setString(2, _email);
@@ -51,6 +51,7 @@ try{
 	ifade.setString(6, _gender);
 	ifade.setString(7, _privelege);
 	ifade.executeUpdate();
+	out.println("Kayit Oldunuz");
 }
 
 catch(SQLException e){
@@ -61,6 +62,15 @@ baglanti.close();
 }
 
 %>
+<br/>
+<input type="button" id="btn" value="Giris Ekrani">
+
+<script>      
+        document.getElementById("btn")
+            .onclick = function(){
+                window.setTimeout(function(){location.href = 'login.jsp';}, 500);                 
+             };
+    </script>
 
 
 </body>

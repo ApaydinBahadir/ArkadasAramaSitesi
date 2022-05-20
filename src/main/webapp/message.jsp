@@ -43,7 +43,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 	ifade=baglanti.prepareStatement("insert into message(userName,sender,groupId,message,sendTime) values(?,?,?,?,?) ");
 	ifade.setString(1, _userName);
 	ifade.setString(2, _sender);

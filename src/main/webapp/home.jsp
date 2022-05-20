@@ -12,16 +12,18 @@
 <title>home</title>
 </head>
 <body>
-			
-		<div id="memberBox">
-		<label><b>Site members</b></label>
-			<table>
+			<table id="memberBox">
 				
 						<%
 						try
 						{
+<<<<<<< Updated upstream
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/newschema", "root", "12345");
+
+=======
 							
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
+>>>>>>> Stashed changes
 						String query="Select userID,userName From member";
 						Statement stmt=conn.createStatement();
 						ResultSet rs=stmt.executeQuery(query);
@@ -36,6 +38,9 @@
 									"<td>"+
 										rs.getString("userName")+
 									"</td>"+
+<<<<<<< Updated upstream
+								"</tr>"+
+=======
 								"</tr>"
 									);
 						}
@@ -103,7 +108,7 @@
 						try
 						{
 						
-						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 						String sql = "SELECT sender,message FROM message WHERE userName = ?";
 						PreparedStatement statement = conn.prepareStatement(sql);
 				        statement.setString(1, (String)request.getSession().getAttribute("userName"));
@@ -113,32 +118,30 @@
 						{
 							
 						out.println(
+>>>>>>> Stashed changes
 								"<tr>"+
 									"<td>"+
-										"<mark>"+rs.getString("sender")+"</mark>"+
+										"<input id='idvmsg' type='text' name='idvmsg' />"+
 									"</td>"+
 									"<td>"+
-										"<b>"+rs.getString("message")+"</b>"+
+										"<input id='sendmsg' type='submit' name='sendmsg' onclick='' value='Send' />"+
 									"</td>"+
 								"</tr>"
-								
-							);
-
+									);
 						}
 						
 						}catch(Exception e)
 						{
 						System.err.println(e);
 						}
-						%>	
-        	</table>
-        </div>
-		
-
+						%>
+					
+							
+			</table>
 
 		<div id="wrapper">
             <div id="menu">
-            
+
                 <p class="welcome">${member.userName}</p>
                 <%
 	            	if(session.getAttribute("privelege").equals("1") || session.getAttribute("privelege").equals("2")){
@@ -146,9 +149,10 @@
 	            			<a href="admin">deneme</a>
 	            		<%
 	            	}
+
                 %>
 
-                
+                <p class="welcome">${member.userName}</p>
                 <p class="logout"><a id="exit" href="logout">Exit Chat</a></p>
             </div>
  
@@ -161,19 +165,15 @@
         </div>
         
         
-        
-        
-        
-        
         <script>
         		var WsUrl = "ws://localhost:8080/ArkadasAramaSitesi/chat";
         		websocket = new WebSocket(WsUrl);
 
         		
+        		
         		websocket.onmessage = function processMessage(usermsg){
         			document.getElementById("chatbox").innerHTML +=  usermsg.data + "<br/>";
         		};
-        		
         		
         		function sendMessage(){
         			websocket.send("<mark>"+"${member.userName}"+"</mark>" + ":" + "<b>"+ usermsg.value +"</b>");
@@ -181,6 +181,8 @@
         		}
         		
         		
+<<<<<<< Updated upstream
+=======
         	
     			document.getElementById("btnsendmsg")
                 		.onclick = function(){
@@ -191,7 +193,7 @@
               	document.getElementById("addfriends")
               			.onclick = function(){
               				window.alert("Friend Added");
-           					window.setTimeout(function(){location.href = 'home.jsp';}, 50);                 
+              				window.setTimeout(function(){location.href = 'home.jsp';}, 50);                 
             	};
             	
             	
@@ -202,8 +204,9 @@
                  };
         	
            </script>
+>>>>>>> Stashed changes
         		
         		
-       
+        </script>
 </body>
 </html>

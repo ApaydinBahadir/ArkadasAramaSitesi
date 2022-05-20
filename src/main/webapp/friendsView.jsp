@@ -28,7 +28,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 	ifade2=baglanti.prepareStatement("Select userName,relationType From relationslist where userId=?");
 	ifade2.setInt(1, _userId);
 	

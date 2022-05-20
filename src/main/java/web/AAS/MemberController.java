@@ -2,6 +2,13 @@ package web.AAS;
 
 import java.sql.*;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+
 public class MemberController {
 	public Member checkLogin(String userName, String password_) throws SQLException,
     ClassNotFoundException {
@@ -10,7 +17,7 @@ public class MemberController {
 		Connection connection = null;
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/newschema","root","12345");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb","root","12345");
 		
 		String sql = "SELECT userID,userName,privelege FROM member WHERE userName = ? and password_ = ?";
 
@@ -39,7 +46,7 @@ public class MemberController {
 		Connection connection = null;
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/newschema","root","12345");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb","root","12345");
 		
 		String sql = "DELETE FROM member WHERE userName= ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
@@ -56,7 +63,7 @@ public class MemberController {
 		Connection connection = null;
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/newschema","root","12345");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb","root","12345");
 		
 		String sql = "Select FROM member WHERE userName= ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
@@ -65,7 +72,6 @@ public class MemberController {
         
 
         connection.close();
-        System.out.print(result);
 		return result;
 	}
 
@@ -73,19 +79,18 @@ public class MemberController {
 		Connection connection = null;
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		connection=DriverManager.getConnection("jdbc:mysql://localhost/newschema","root","12345");
+		connection=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb","root","12345");
 		
 		String sql = "UPDATE member SET privelege =? WHERE userName= ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, "1");
         statement.setString(2, userName);
-        boolean result = statement.execute();
+        statement.execute();
         
 
         connection.close();
-        System.out.print(result);
 		return;		
 	}
-	
+
 
 }

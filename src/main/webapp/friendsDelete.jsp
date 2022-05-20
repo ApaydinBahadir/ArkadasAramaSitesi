@@ -28,7 +28,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 	ifade3=baglanti.prepareStatement("Delete From relationslist where userName=?");
 	ifade3.setString(1, _userName);
 	ifade3.executeUpdate();
