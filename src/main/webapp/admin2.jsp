@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
-   
+
+<%@ page import="java.sql.Connection, java.sql.PreparedStatement" %>
+<%@ page import="java.sql.SQLException,java.sql.DriverManager" %>
+<%@ page import="java.sql.ResultSet,java.sql.Statement"%>
     
 <!DOCTYPE html>
 <html>
@@ -33,7 +36,47 @@
 				<button>Get Message</button>
 			</form>
 		</div>
-				
+		<%
+		if(session.getAttribute("getMessage") != null){
+						try
+						{
+						
+						Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
+						String sql = "select userName,message,sendTime from message where sender=? ORDER BY userName DESC, sendTime ;";
+						PreparedStatement statement = conn.prepareStatement(sql);
+				        statement.setString(1, (String)request.getSession().getAttribute("getMessage"));
+				        ResultSet rs=statement.executeQuery();
+					
+						while(rs.next())
+						{
+							
+						out.println(
+								"<tr>"+
+									"<td>"+
+										"<mark>"+rs.getString("userName")+"</mark>"+
+									"</td>"+
+									"<td>"+
+										"<b>"+rs.getString("message")+"</b>"+
+									"</td>"+
+									"<td>"+
+										"<b>"+rs.getString("sendTime")+"</b>"+
+									"</td>"+
+								"</tr>"+
+								"</br>"
+								
+							);
+
+						}
+						
+						}catch(Exception e)
+						{
+						System.err.println(e);
+						}
+		}
+		session.setAttribute("getMessage", null);
+
+						%>	
+
 	</body>
 	
 	<script type="text/javascript">

@@ -30,9 +30,7 @@ public class AdminFunct extends HttpServlet {
 				memberCtrl.deleteUser(userName);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}    
-	    	HttpSession session = request.getSession();
-	        session.setAttribute("info","User deleted");
+			}
 		}
 		
 		if(request.getParameter("adminer") != null && !request.getParameter("adminer").isEmpty()) {
@@ -42,9 +40,17 @@ public class AdminFunct extends HttpServlet {
 				memberCtrl.makeAdmin(userName);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}    
-	    	HttpSession session = request.getSession();
-	        session.setAttribute("info","User deleted");
+			}
+		}
+		
+		if(request.getParameter("message") != null && !request.getParameter("message").isEmpty()) {
+			String userName = request.getParameter("message");
+			
+            HttpSession session = request.getSession();
+            session.setAttribute("getMessage", userName);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("admin2.jsp");
+            dispatcher.forward(request, response);
 		}
 		
 	}

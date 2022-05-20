@@ -31,7 +31,7 @@ try{
 	out.println("JDBC Yüklenemedi!!!!!!!");
 	}
 	
-	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "My12?Sql");
+	baglanti=DriverManager.getConnection("jdbc:mysql://localhost/arkadasaramasitesidb", "root", "12345");
 	ifade=baglanti.prepareStatement("insert into relationslist(userId,userName,relationType) values(?,?,?) ");
 	ifade.setInt(1, _userId);
 	ifade.setString(2, _userName);
